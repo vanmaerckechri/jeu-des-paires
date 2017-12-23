@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Le Jeu des Paires</title>
+</head>
+<style type="text/css">
+	@keyframes retournerCarte
+	{
+		0%
+		{
+			transform: rotateY(0deg);
+		}
+		100%
+		{
+			transform: rotateY(180deg);
+		}
+	}
+	@keyframes retournerDos
+	{
+		0%
+		{
+			transform: rotateY(0deg);
+		}
+		50%
+		{
+			opacity: 1;
+		}
+		51%
+		{
+			opacity: 0;
+		}
+		100%
+		{
+			opacity: 0;
+			transform: rotateY(180deg);
+		}
+	}
+	body
+	{
+	}
+	img
+	{
+		display: block;
+	}
+	#main
+	{
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0 auto;
+		width: 780px;
+	}
+	.perspectiveCarte
+	{
+		position: relative;
+		margin: 5px;
+		perspective-origin: center center;
+		perspective: 250px;
+	}
+	.carte
+	{
+		width: 250px;
+		height: 250px;
+	}
+	.carte_dos
+	{
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-color: red;
+		z-index: 100;
+	}
+	.carte_anim
+	{
+		animation-name: retournerCarte;
+		animation-duration: .5s;		
+		animation-timing-function: linear;
+		animation-fill-mode: forwards;
+	}
+	.carte_dos_anim
+	{
+		animation-name: retournerDos;
+		animation-duration: .5s;		
+		animation-timing-function: linear;
+		animation-fill-mode: forwards;
+	}
+
+</style>
+<body>
+	<div id="main">
+	</div>
+	<script type="text/javascript">
+		var joueurTour = 0;
+		var cartesRetournees = 0;
+		var carteVisible1;
+		var carteVisible2;
+		var carteID1;
+		var carteID2;
+		var randomNum;
+		/* init Tableaux Cartes (SRC, ALT et déclarer que se sont des paires) */
+		var imagesSrc = new Array ('assets/images/anehihan.jpg', 'assets/images/chatminou.jpg', 'assets/images/chientoutou.jpg', 'assets/images/lamacrachat.jpg', 'assets/images/lapinscrottes.jpg', 'assets/images/lionnegraou.jpg', 'assets/images/oursbaby.jpg');
+		var imagesAlt = new Array ('Un âne qui boude', 'Un petit chat roux mignon qui pose', 'Un chien roux avec des lunettes', 'Un lama avec les cheveux devant les yeux', 'Deux lapins roux dans la neige', 'Une lionne qui se repose', 'un petit ours blanc qui se promène');
+		var imagesMultiples = new Array;
+		for (i = 0; i < imagesSrc.length; i++)
+		{
+			imagesMultiples[i] = 2;
+		}
+		var cartes = new Array (imagesSrc, imagesAlt, imagesMultiples);
+		var cartesNbr = imagesSrc.length * imagesMultiples[0];
+		/* Placement des cartes au hasard */
+		function cartesInstall()
+		{
+			for (i = 0; i < cartesNbr; i++)
+			{		
+				randomNum = Math.floor(Math.random()*cartes[0].length);
+				document.getElementById('main').innerHTML += '<div onclick="carteRetourner(this);" class="perspectiveCarte"> <img onclick="carteRetourner(this);" class="carte" src="'+cartes[0][randomNum]+'" alt="'+cartes[1][randomNum]+'"><img class="carte carte_dos" src="" alt=""></div>';
+				cartes[2][randomNum]--;
+				if (cartes[2][randomNum] == 0)
+				{
+					for (j = 0; j < 3; j++)
+					{
+						cartes[j].splice(randomNum, 1);
+					}
+				}
+			}
+			joueurTour = 1;
+		}
+		function cartesComparer()
+		{
+			if (carteVisible1 != carteVisible2)
+			{
+				setTimeout(function(){ carteID1.childNodes[1].className = carteID1.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 500);
+				setTimeout(function(){ carteID1.childNodes[2].className = carteID1.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 500);
+				setTimeout(function(){ carteID2.childNodes[1].className = carteID2.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 500);
+				setTimeout(function(){ carteID2.childNodes[2].className = carteID2.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 500);
+			}
+			cartesRetournees = 0;
+		}
+		function carteRetourner(carteID)
+		{
+			if (joueurTour == 1 && cartesRetournees < 2)
+			{
+				carteID.childNodes[1].className += ' carte_anim';
+				carteID.childNodes[2].className += ' carte_dos_anim';
+				if (cartesRetournees == 0)
+				{
+					carteVisible1 = carteID.childNodes[1].src;
+					carteID1 = carteID;
+					joueurTour = 0;
+				}
+				else
+				{
+					carteVisible2 = carteID.childNodes[1].src;
+					carteID2 = carteID;
+					joueurTour = 0;
+				}
+				cartesRetournees ++;
+				setTimeout(function(){ joueurTour = 1; }, 600);
+
+			}
+			if (cartesRetournees == 2)
+			{
+				cartesComparer();
+			}
+		}
+		function carteFaceDos()
+		{
+				setTimeout(function(){ carteID.childNodes[1].className = carteID.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 1000);
+				setTimeout(function(){ carteID.childNodes[2].className = carteID.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 1000);
+		}
+		cartesInstall();
+	</script>
+</body>
+</html>
