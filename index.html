@@ -116,7 +116,7 @@
 				cartes[2][randomNum]--;
 				if (cartes[2][randomNum] == 0)
 				{
-					for (j = 0; j < 3; j++)
+					for (j = 0; j < 3; j++) /* j < 3, 3 pour les dimensions correspondant à l'index j que je désire effacer du tableau */
 					{
 						cartes[j].splice(randomNum, 1);
 					}
@@ -126,8 +126,10 @@
 		}
 		function cartesComparer()
 		{
+			/* si les deux dernières cartes retournées ne sont pas les mêmes */
 			if (carteVisible1 != carteVisible2)
 			{
+				/* on cible le premier enfant de la div class="perspectiveCarte", et on efface la classe d'animation avec une commande sortie des limbes ( /(?:^|\s)carte_anim(?!\S)/g , "" ) */
 				setTimeout(function(){ carteID1.childNodes[1].className = carteID1.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 500);
 				setTimeout(function(){ carteID1.childNodes[2].className = carteID1.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 500);
 				setTimeout(function(){ carteID2.childNodes[1].className = carteID2.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 500);
@@ -139,14 +141,20 @@
 		{
 			if (joueurTour == 1 && cartesRetournees < 2)
 			{
+				/* on cible le premier enfant (la face de la carte) de la div class="perspectiveCarte", parent sur lequel on a posé le onclick qui a activé ce bout de code. On lui ajoute la classe avec l'animation */
 				carteID.childNodes[1].className += ' carte_anim';
+				/* On fait la même chose qu'à la ligne précédente mais avec le deuxième enfant (le dos de la carte) */
 				carteID.childNodes[2].className += ' carte_dos_anim';
+				/* si c'est la première des deux cartes retournées */
 				if (cartesRetournees == 0)
 				{
+					/* on stocke l'adresse de l'image dans carteVisible1 pour la comparée avec la deuxième plus tard */
 					carteVisible1 = carteID.childNodes[1].src;
+					/* on stocke la div class="perspectiveCarte" dans carteID1 */
 					carteID1 = carteID;
 					joueurTour = 0;
 				}
+				/* si c'est la deuxième carte qu'on retourne */
 				else
 				{
 					carteVisible2 = carteID.childNodes[1].src;
@@ -161,11 +169,6 @@
 			{
 				cartesComparer();
 			}
-		}
-		function carteFaceDos()
-		{
-				setTimeout(function(){ carteID.childNodes[1].className = carteID.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 1000);
-				setTimeout(function(){ carteID.childNodes[2].className = carteID.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 1000);
 		}
 		cartesInstall();
 	</script>
