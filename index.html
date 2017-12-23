@@ -38,16 +38,22 @@
 	body
 	{
 	}
-	img
-	{
-		display: block;
-	}
 	#main
 	{
 		display: flex;
 		flex-wrap: wrap;
 		margin: 0 auto;
 		width: 780px;
+	}
+	img
+	{
+		display: block;
+	}
+	p
+	{
+		width: 100%;
+		text-align: center;
+		font-size: 24px;
 	}
 	.perspectiveCarte
 	{
@@ -87,6 +93,7 @@
 </style>
 <body>
 	<div id="main">
+		<p id="chrono">TIMING</p>
 	</div>
 	<script type="text/javascript">
 		var joueurTour = 0;
@@ -96,6 +103,7 @@
 		var carteID1;
 		var carteID2;
 		var randomNum;
+		var jeuTempsDispo = 60;
 		/* init Tableaux Cartes (SRC, ALT et déclarer que se sont des paires) */
 		var imagesSrc = new Array ('assets/images/anehihan.jpg', 'assets/images/chatminou.jpg', 'assets/images/chientoutou.jpg', 'assets/images/lamacrachat.jpg', 'assets/images/lapinscrottes.jpg', 'assets/images/lionnegraou.jpg', 'assets/images/oursbaby.jpg');
 		var imagesAlt = new Array ('Un âne qui boude', 'Un petit chat roux mignon qui pose', 'Un chien roux avec des lunettes', 'Un lama avec les cheveux devant les yeux', 'Deux lapins roux dans la neige', 'Une lionne qui se repose', 'un petit ours blanc qui se promène');
@@ -170,7 +178,17 @@
 				cartesComparer();
 			}
 		}
+		function chronometre()
+		{
+			document.getElementById("chrono").innerHTML = jeuTempsDispo + " secondes restantes";
+			if (jeuTempsDispo == 0)
+			{
+				clearInterval(chronoInterval);
+			}
+ 			jeuTempsDispo--;
+		}
 		cartesInstall();
+		var chronoInterval = setInterval(chronometre, 1000);
 	</script>
 </body>
 </html>
