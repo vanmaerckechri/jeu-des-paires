@@ -130,10 +130,10 @@
 			if (carteVisible1 != carteVisible2)
 			{
 				/* on cible le premier enfant de la div class="perspectiveCarte", et on efface la classe d'animation avec une commande sortie des limbes ( /(?:^|\s)carte_anim(?!\S)/g , "" ) */
-				setTimeout(function(){ carteID1.childNodes[1].className = carteID1.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 500);
-				setTimeout(function(){ carteID1.childNodes[2].className = carteID1.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 500);
-				setTimeout(function(){ carteID2.childNodes[1].className = carteID2.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 500);
-				setTimeout(function(){ carteID2.childNodes[2].className = carteID2.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 500);
+				setTimeout(function(){ carteID1.childNodes[1].className = carteID1.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 1000);
+				setTimeout(function(){ carteID1.childNodes[2].className = carteID1.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 1000);
+				setTimeout(function(){ carteID2.childNodes[1].className = carteID2.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 1000);
+				setTimeout(function(){ carteID2.childNodes[2].className = carteID2.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 1000);
 			}
 			cartesRetournees = 0;
 		}
@@ -162,7 +162,7 @@
 					joueurTour = 0;
 				}
 				cartesRetournees ++;
-				setTimeout(function(){ joueurTour = 1; }, 600);
+				setTimeout(function(){ joueurTour = 1; }, 1000);
 
 			}
 			if (cartesRetournees == 2)
