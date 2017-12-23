@@ -112,7 +112,7 @@
 			for (i = 0; i < cartesNbr; i++)
 			{		
 				randomNum = Math.floor(Math.random()*cartes[0].length);
-				document.getElementById('main').innerHTML += '<div onclick="carteRetourner(this);" class="perspectiveCarte"> <img onclick="carteRetourner(this);" class="carte" src="'+cartes[0][randomNum]+'" alt="'+cartes[1][randomNum]+'"><img class="carte carte_dos" src="" alt=""></div>';
+				document.getElementById('main').innerHTML += '<div onclick="carteRetourner(this);" class="perspectiveCarte"> <img class="carte" src="'+cartes[0][randomNum]+'" alt="'+cartes[1][randomNum]+'"><img class="carte carte_dos" src="assets/images/dos.jpg" alt=""></div>';
 				cartes[2][randomNum]--;
 				if (cartes[2][randomNum] == 0)
 				{
