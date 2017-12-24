@@ -73,6 +73,17 @@
 		text-shadow: 0 0 1px black;
 		z-index: 200;
 	}
+	#recommencer
+	{
+		display: none;
+		position: fixed;
+		border: 2px solid red;
+		top: 70vh;
+		width: 780px;
+		text-align: center;
+		font-size: 64px;
+		z-index: 200;
+	}
 	.perspectiveCarte
 	{
 		position: relative;
@@ -114,6 +125,7 @@
 		<h1>Le Jeu des Paires</h1>
 		<p id="chrono">TIMING</p>
 		<h2 id="resultatSms"></h2>
+		<button id="recommencer" onclick="location.reload()" type="button">Nouvelle Partie</button>
 	</div>
 	<script type="text/javascript">
 		var joueurTour = 0;
@@ -157,6 +169,7 @@
 		{
 				clearInterval(chronoInterval);
 				document.getElementById("resultatSms").innerHTML = "VICTOIRE";
+				document.getElementById("recommencer").style.display = "block";
 				cartesRetournees = 3;
 				joueurTour = 0;
 		}
@@ -221,6 +234,7 @@
 			{
 				clearInterval(chronoInterval);
 				document.getElementById("resultatSms").innerHTML = "PERDU";
+				document.getElementById("recommencer").style.display = "block";
 				cartesRetournees = 3;
 				joueurTour = 0;
 			}
