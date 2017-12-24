@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Le Jeu des Paires</title>
-	  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icones/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icones/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icones/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./manifest.json">
-    <link rel="mask-icon" href="./assets/icones/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
 </head>
 <style type="text/css">
@@ -85,10 +85,9 @@
 	#recommencer
 	{
 		display: none;
-		position: fixed;
 		border: 2px solid red;
 		top: 70vh;
-		width: 780px;
+		width: 100%;
 		text-align: center;
 		font-size: 64px;
 		z-index: 200;
@@ -127,7 +126,41 @@
 		animation-timing-function: linear;
 		animation-fill-mode: forwards;
 	}
-
+	@media (max-width: 800px)
+	{
+		h1
+		{
+			font-size: 18px;
+		}
+		p
+		{
+			font-size: 16px;
+		}
+		#main
+		{
+			width: 100%;
+		}
+		.perspectiveCarte
+		{
+			width: 33%;
+			margin: 0;
+		}
+		.carte, .carte_dos
+		{
+			width: 100%;
+			height: auto;
+		}	
+		#recommencer
+		{
+			font-size: 24px;
+		}
+		#resultatSms
+		{
+			margin: 0;
+			width: 100%;
+			font-size: 42px;
+		}
+	}
 </style>
 <body>
 	<div id="main">
@@ -257,11 +290,12 @@
 		cartesInstall();
 		var chronoInterval = setInterval(chronometre, 1000);
 	</script>
-	<script src="upup.min.js">
-    UpUp.start({
-        'content-url': 'index.html',
-        'assets': ['./assets/images/*.jpg']
-    });
-</script>
+	<script src="upup.min.js"></script>
+	<script>
+	    UpUp.start({
+	        'content-url': 'index.html',
+	        'assets': ['assets/images/anehihan.jpg', 'assets/images/chatminou.jpg', 'assets/images/chientoutou.jpg', 'assets/images/lamacrachat.jpg', 'assets/images/lapinscrottes.jpg', 'assets/images/lionnegraou.jpg', 'assets/images/oursbaby.jpg', 'assets/images/dos.jpg']
+	    });
+	</script>
 </body>
 </html>
