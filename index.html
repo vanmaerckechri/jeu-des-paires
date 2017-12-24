@@ -40,10 +40,17 @@
 	}
 	#main
 	{
+		position: relative;
 		display: flex;
 		flex-wrap: wrap;
 		margin: 0 auto;
 		width: 780px;
+	}
+	h1
+	{
+		margin: 16px 0 0 0;
+		width: 100%;
+		text-align: center;
 	}
 	img
 	{
@@ -54,6 +61,17 @@
 		width: 100%;
 		text-align: center;
 		font-size: 24px;
+	}
+	#resultatSms
+	{
+		position: fixed;
+		top: 40vh;
+		width: 780px;
+		text-align: center;
+		font-size: 64px;
+		color: red;
+		text-shadow: 0 0 1px black;
+		z-index: 200;
 	}
 	.perspectiveCarte
 	{
@@ -93,7 +111,9 @@
 </style>
 <body>
 	<div id="main">
+		<h1>Le Jeu des Paires</h1>
 		<p id="chrono">TIMING</p>
+		<h2 id="resultatSms"></h2>
 	</div>
 	<script type="text/javascript">
 		var joueurTour = 0;
@@ -104,6 +124,7 @@
 		var carteID2;
 		var randomNum;
 		var jeuTempsDispo = 60;
+		var pairesDecouvertes = 0;
 		/* init Tableaux Cartes (SRC, ALT et déclarer que se sont des paires) */
 		var imagesSrc = new Array ('assets/images/anehihan.jpg', 'assets/images/chatminou.jpg', 'assets/images/chientoutou.jpg', 'assets/images/lamacrachat.jpg', 'assets/images/lapinscrottes.jpg', 'assets/images/lionnegraou.jpg', 'assets/images/oursbaby.jpg');
 		var imagesAlt = new Array ('Un âne qui boude', 'Un petit chat roux mignon qui pose', 'Un chien roux avec des lunettes', 'Un lama avec les cheveux devant les yeux', 'Deux lapins roux dans la neige', 'Une lionne qui se repose', 'un petit ours blanc qui se promène');
@@ -132,6 +153,13 @@
 			}
 			joueurTour = 1;
 		}
+		function victoire()
+		{
+				clearInterval(chronoInterval);
+				document.getElementById("resultatSms").innerHTML = "VICTOIRE";
+				cartesRetournees = 3;
+				joueurTour = 0;
+		}
 		function cartesComparer()
 		{
 			/* si les deux dernières cartes retournées ne sont pas les mêmes */
@@ -143,7 +171,15 @@
 				setTimeout(function(){ carteID2.childNodes[1].className = carteID2.childNodes[1].className.replace( /(?:^|\s)carte_anim(?!\S)/g , "" ); }, 1000);
 				setTimeout(function(){ carteID2.childNodes[2].className = carteID2.childNodes[2].className.replace( /(?:^|\s)carte_dos_anim(?!\S)/g , "" ); }, 1000);
 			}
+			else
+			{
+				pairesDecouvertes++;
+			}
 			cartesRetournees = 0;
+			if (pairesDecouvertes == cartesNbr/2)
+			{
+				victoire();
+			}
 		}
 		function carteRetourner(carteID)
 		{
@@ -184,6 +220,9 @@
 			if (jeuTempsDispo == 0)
 			{
 				clearInterval(chronoInterval);
+				document.getElementById("resultatSms").innerHTML = "PERDU";
+				cartesRetournees = 3;
+				joueurTour = 0;
 			}
  			jeuTempsDispo--;
 		}
