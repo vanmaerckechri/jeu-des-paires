@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Le Jeu des Paires</title>
 </head>
 <style type="text/css">
@@ -137,6 +140,7 @@
 		var randomNum;
 		var jeuTempsDispo = 60;
 		var pairesDecouvertes = 0;
+		var chronoActiver = false;
 		/* init Tableaux Cartes (SRC, ALT et déclarer que se sont des paires) */
 		var imagesSrc = new Array ('assets/images/anehihan.jpg', 'assets/images/chatminou.jpg', 'assets/images/chientoutou.jpg', 'assets/images/lamacrachat.jpg', 'assets/images/lapinscrottes.jpg', 'assets/images/lionnegraou.jpg', 'assets/images/oursbaby.jpg');
 		var imagesAlt = new Array ('Un âne qui boude', 'Un petit chat roux mignon qui pose', 'Un chien roux avec des lunettes', 'Un lama avec les cheveux devant les yeux', 'Deux lapins roux dans la neige', 'Une lionne qui se repose', 'un petit ours blanc qui se promène');
@@ -196,6 +200,7 @@
 		}
 		function carteRetourner(carteID)
 		{
+			chronoActiver = true;
 			if (joueurTour == 1 && cartesRetournees < 2)
 			{
 				/* on cible le premier enfant (la face de la carte) de la div class="perspectiveCarte", parent sur lequel on a posé le onclick qui a activé ce bout de code. On lui ajoute la classe avec l'animation */
@@ -229,16 +234,19 @@
 		}
 		function chronometre()
 		{
-			document.getElementById("chrono").innerHTML = jeuTempsDispo + " secondes restantes";
-			if (jeuTempsDispo == 0)
+			if (chronoActiver == true)
 			{
-				clearInterval(chronoInterval);
-				document.getElementById("resultatSms").innerHTML = "PERDU";
-				document.getElementById("recommencer").style.display = "block";
-				cartesRetournees = 3;
-				joueurTour = 0;
-			}
- 			jeuTempsDispo--;
+				document.getElementById("chrono").innerHTML = jeuTempsDispo + " secondes restantes";
+				if (jeuTempsDispo == 0)
+				{
+					clearInterval(chronoInterval);
+					document.getElementById("resultatSms").innerHTML = "PERDU";
+					document.getElementById("recommencer").style.display = "block";
+					cartesRetournees = 3;
+					joueurTour = 0;
+				}
+	 			jeuTempsDispo--;
+	 		}
 		}
 		cartesInstall();
 		var chronoInterval = setInterval(chronometre, 1000);
