@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Le Jeu des Paires</title>
+	  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icones/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icones/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icones/favicon-16x16.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="mask-icon" href="./assets/icones/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <style type="text/css">
 	@keyframes retournerCarte
@@ -251,5 +257,11 @@
 		cartesInstall();
 		var chronoInterval = setInterval(chronometre, 1000);
 	</script>
+	<script src="upup.min.js">
+    UpUp.start({
+        'content-url': 'index.html',
+        'assets': ['./assets/images/*.jpg']
+    });
+</script>
 </body>
 </html>
