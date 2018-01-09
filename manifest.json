@@ -1,5 +1,5 @@
 {
-    "name": "Le Jeu des Paires",
+    "name": "Jeu des Paires",
     "short_name" : "Paires",
     "start_url": "index.html?utm_source=homescreen",
     "scope" : "./",
